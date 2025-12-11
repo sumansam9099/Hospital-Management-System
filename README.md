@@ -16,7 +16,7 @@ The main purpose of this project is to:
  =>Provide a simple model of how real hospital databases work
 
 
-Key Features
+# Key Features
 
  =>Add and store patient and doctor details
 
@@ -30,12 +30,12 @@ Key Features
 
 
 
-Why This Project Is Useful
+# Why This Project Is Useful
 
  =>This database project demonstrates how hospitals store and manage huge amounts of medical data. It shows relationships between important entities and teaches how SQL can be used to manage real-life systems.
 
 
-Disadvantage
+# Disadvantage
 
  =>Manual Data Entry : All data must be entered manually, which can lead to errors or inconsistencies. 
 
@@ -47,7 +47,7 @@ Disadvantage
 
 
 
-Working Flow
+# Working Flow
 
  =>Patient Registration : A new patient provides personal information (name, gender, DOB, contact, address).
 
