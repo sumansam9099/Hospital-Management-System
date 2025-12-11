@@ -77,4 +77,7 @@ The main purpose of this project is to:
 
    Old or irrelevant records can be deleted if necessary.
 
+# --STEP 1: Create and Use Database
 
+ create database Hospital;
+ use Hospital;
