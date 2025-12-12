@@ -83,3 +83,41 @@ The main purpose of this project is to:
  use Hospital;
 
  # STEP 2: Create Patient Table
+
+ create table Patient (patient_id INT PRIMARY KEY, name VARCHAR(100),gender VARCHAR(10),dob DATE, phone VARCHAR(20),address VARCHAR(255));
+
+ # Insert Data into Table
+
+  INSERT INTO Patient VALUES(1,'Virat', 'Male', '1988-11-05', '9988770018', 'Delhi'),(2,'Rohit', 'Male', '1987-04-30', '9998880045', 'Mumbai'),(3,'Seema','Female','1995-11-17','8809734512','Agra'),(4,'Aditiya','Male','1993-09-12','7839004215','Jaipur'),(5,'Smriti','Female','1995-12-27','7008231972','Dispur'),(6,'Kiran','Female','1990-02-01','7008657483','Chennai');
+
+  # STEP 3: Create Doctor Table
+
+create table Doctor (doctor_id INT PRIMARY KEY, name VARCHAR(100),specialization VARCHAR(100),phone VARCHAR(20));
+
+# Insert Data into Table
+
+INSERT INTO Doctor VALUES(1,'Dr Mayur', 'Cardiologist', '5550101'),(2,'Dr Rishabh', 'Neurologist', '5550102'),(3,'Dr Maya', 'General Physician','5550103');
+
+# STEP 4: Create Appointment Table
+
+create table Appointment (appointment_id INT PRIMARY KEY,patient_id INT,doctor_id INT,appointment_date DATETIME,status VARCHAR(50),FOREIGN KEY (patient_id) REFERENCES Patient(patient_id), FOREIGN KEY (doctor_id) REFERENCES Doctor(doctor_id));
+
+# Insert Data into Table
+
+INSERT INTO Appointment VALUES(1,1,1,'2025-01-18 09:00:00','Scheduled'),(2,2,2,'2025-01-18 08:00:00','Completed'),(3,3,3,'2025-01-19','Scheduled'),(4,4,3,'2025-01-20','Scheduled'),(5,5,1,'2025-01-19','Completed'),(6,6,2,'2025-01-17','Completed');
+
+# STEP 5: Create Treatment Table
+
+create table Treatment (treatment_id INT PRIMARY KEY, patient_id INT, doctor_id INT, treatment_date DATE , diagnosis TEXT, treatment_details TEXT,FOREIGN KEY (patient_id) REFERENCES Patient(patient_id),FOREIGN KEY (doctor_id) REFERENCES Doctor(doctor_id));
+
+# Insert Data into Table
+
+INSERT INTO Treatment VALUES(1,1,1,'2025-01-18','High blood pressure', 'Prescribed lifestyle changes'),(2,2,2,'2025-01-18','Migraine','Recommended MRI and medication'),(3,3,3,'2025-01-19','Common cold','Get plenty of rest and drink more fuilds'),(4,4,3,'2025-01-20','Fever','Stay at home avoid going outside'),(5,5,1,'2025-01-19','Mild chest pain','Recommended ECG and medication'),(6,6,2,'2025-01-17','Fits(seziures)','Avoid stress as much as possible');
+
+# STEP 6: Create Prescription Table
+
+create table Prescription (prescription_id INT PRIMARY KEY,treatment_id INT,medication VARCHAR(100),dosage VARCHAR(50),duration VARCHAR(50),FOREIGN KEY (treatment_id) REFERENCES Treatment(treatment_id));
+
+# Insert Data into Table
+
+INSERT INTO Prescription VALUES(1,1,'Amlodipine','5mg','30 days'),(2,2,'Ibuprofen','200mg','7 days'),(3,3,'Montelukast','10mg','5 days'),(4,4,'Paracetomol','500mg','2 days'),(5,5,'Aspirin','325mg','15 days'),(6,6,'Carbamazepine','800mg','90 days');
