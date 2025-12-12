@@ -81,3 +81,5 @@ The main purpose of this project is to:
 
  create database Hospital;
  use Hospital;
+
+ # STEP 2: Create Patient Table
