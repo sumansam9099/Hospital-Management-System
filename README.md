@@ -157,3 +157,11 @@ inner join Patient ON Treatment.patient_id = Patient.patient_id;
 
 # 11) Show each doctor with total appointments and total treatments they handled
  SELECT d.name AS doctor,COUNT(DISTINCT a.appointment_id) AS total_appointments,COUNT(DISTINCT t.treatment_id) AS total_treatments FROM Doctor d LEFT JOIN Appointment a ON d.doctor_id = a.doctor_id LEFT JOIN Treatment t ON d.doctor_id = t.doctor_id GROUP BY d.doctor_id;
+
+# CONCLUSION
+
+The Hospital Management database designed in MySQL successfully demonstrates how relational database concepts can be applied to organize and manage hospital-related information efficiently. By creating well-structured tables such as Patient, Doctor, Appointment, Treatment, and Prescription, this project ensures systematic storage of critical medical and administrative data.
+
+Through the use of primary keys, foreign keys, and referential integrity constraints, the database maintains accurate relationships between patients, doctors, appointments, and treatments. The insertion of sample records allows real-time testing of various SQL operations such as queries, joins, filtering, and reporting, which reflects how a real hospital might function in daily operations.
+
+This project proves that MySQL is a powerful tool for managing healthcare data, offering reliability, data consistency, and easy retrieval of information. The structure can also be extended with additional modules such as billing, departments, staff management, and access control to make it suitable for a full-scale Hospital Management System.
