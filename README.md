@@ -121,3 +121,39 @@ create table Prescription (prescription_id INT PRIMARY KEY,treatment_id INT,medi
 # Insert Data into Table
 
 INSERT INTO Prescription VALUES(1,1,'Amlodipine','5mg','30 days'),(2,2,'Ibuprofen','200mg','7 days'),(3,3,'Montelukast','10mg','5 days'),(4,4,'Paracetomol','500mg','2 days'),(5,5,'Aspirin','325mg','15 days'),(6,6,'Carbamazepine','800mg','90 days');
+
+# STEP 7: Queries and Output
+
+# 1) Show all patients for their appointments
+ SELECT name, appointment_date, status FROM Patient inner join Appointment ON Patient.patient_id = Appointment.patient_id;
+
+# 2) Show treatments given by each doctor
+ SELECT Doctor.name as Doctor, Patient.name as Patient, diagnosis, treatment_date from Treatment inner join Doctor ON Treatment.doctor_id = Doctor.doctor_id
+inner join Patient ON Treatment.patient_id = Patient.patient_id;
+
+# 3) Show prescriptions for a patient
+ SELECT Patient.name, medication, dosage, duration FROM Prescription inner join Treatment ON Prescription.treatment_id = Treatment.treatment_id inner join Patient ON Treatment.patient_id = Patient.patient_id where Patient.patient_id = 1;
+
+ # 4) Show appointments with doctor names
+  SELECT a.appointment_id, d.name AS doctor, a.appointment_date, a.status FROM Appointment a JOIN Doctor d ON a.doctor_id = d.doctor_id;
+
+ # 5) Show treatments with patient names
+  SELECT t.treatment_id, p.name AS patient, t.diagnosis FROM Treatment t INNER JOIN Patient p ON t.patient_id = p.patient_id;
+
+# 6) Show treatments with patient and doctor names
+ SELECT t.treatment_id, p.name AS patient, d.name AS doctor, t.diagnosis FROM Treatment t INNER JOIN Patient p ON t.patient_id = p.patient_id INNER JOIN Doctor d ON t.doctor_id = d.doctor_id;
+
+# 7) Show prescriptions with treatment details
+ SELECT pr.prescription_id, pr.medication, t.diagnosis FROM Prescription pr INNER JOIN Treatment t ON pr.treatment_id = t.treatment_id;
+
+# 8) Show prescriptions with patient names (via treatment)
+ SELECT pr.prescription_id, p.name AS patient, pr.medication FROM Prescription pr INNER JOIN Treatment t ON pr.treatment_id = t.treatment_id INNER JOIN Patient p ON t.patient_id = p.patient_id;
+
+# 9) Show prescriptions with doctor names
+ SELECT pr.prescription_id, d.name AS doctor, pr.medication FROM Prescription pr INNER JOIN Treatment t ON pr.treatment_id = t.treatment_id INNER JOIN Doctor d ON t.doctor_id = d.doctor_id;
+
+# 10) Show full chain: patient → doctor → treatment → prescription
+ SELECT p.name AS patient, d.name AS doctor, t.diagnosis, pr.medication FROM Prescription pr INNER JOIN Treatment t ON pr.treatment_id = t.treatment_id INNER JOIN Patient p ON t.patient_id = p.patient_id INNER JOIN Doctor d ON t.doctor_id = d.doctor_id;
+
+# 11) Show each doctor with total appointments and total treatments they handled
+ SELECT d.name AS doctor,COUNT(DISTINCT a.appointment_id) AS total_appointments,COUNT(DISTINCT t.treatment_id) AS total_treatments FROM Doctor d LEFT JOIN Appointment a ON d.doctor_id = a.doctor_id LEFT JOIN Treatment t ON d.doctor_id = t.doctor_id GROUP BY d.doctor_id;
